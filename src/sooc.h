@@ -2,7 +2,7 @@
 
 #include <stdbool.h>
 
-struct appstate {
+struct app_state {
 	// Mouse
 	// Time
 	bool quit_requested;

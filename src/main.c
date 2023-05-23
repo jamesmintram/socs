@@ -1,14 +1,14 @@
 #include "game.h"
-#include "sooc.h"
+#include  "sooc.h"
 
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include "SDL.h"
+#include "SDL_opengl.h"
 
-#include <soloud_c.h>
+#include "soloud_c.h"
 
 #include <stdio.h>
 
-int sys_update(struct appstate* app_state)
+int sys_update(struct app_state* app_state)
 {
 	// Render
 	SDL_GL_SwapWindow(app_state->main_window);
@@ -41,10 +41,10 @@ int main(int argc, char** argv)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-	Soloud* soloud = Soloud_create();
-	Soloud_initEx(soloud, SOLOUD_CLIP_ROUNDOFF | SOLOUD_ENABLE_VISUALIZATION, SOLOUD_AUTO, SOLOUD_AUTO, SOLOUD_AUTO, SOLOUD_AUTO);
+//	Soloud* soloud = Soloud_create();
+//	Soloud_initEx(soloud, SOLOUD_CLIP_ROUNDOFF | SOLOUD_ENABLE_VISUALIZATION, SOLOUD_AUTO, SOLOUD_AUTO, SOLOUD_AUTO, SOLOUD_AUTO);
 
-	struct appstate app_state = { 0 };
+	struct app_state app_state = { 0 };
 
 	app_state.main_window = SDL_CreateWindow(
 		APP_NAME,
@@ -58,8 +58,6 @@ int main(int argc, char** argv)
 		fprintf(stderr, "Unable to create main window");
 		return -1;
 	}
-
-	bool close_requested = false;
 
 	while (app_state.quit_requested == false) 
 	{

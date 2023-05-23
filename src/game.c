@@ -1,3 +1,5 @@
+#include "SDL.h"
+
 #include "game.h"
 #include "sooc.h"
 

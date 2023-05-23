@@ -26,6 +26,7 @@ solution "sglbase"
 		xcodebuildsettings {
 			["MACOSX_DEPLOYMENT_TARGET"] = "10.9",
 			["ALWAYS_SEARCH_USER_PATHS"] = "YES", -- This is the minimum version of macos we'll be able to run on
+            ['ALWAYS_SEARCH_USER_PATHS'] = "NO",
 		};
 
 	filter {"system:windows"}
@@ -67,7 +68,15 @@ project "sglbase"
 	-- links { "gdi32", "kernel32", "psapi" }
 	-- filter "system:linux"
 	-- 	links { "dl", "GL", "pthread", "X11" }
-	-- filter "system:macosx"
+	filter "system:macosx"
+    libdirs {
+        path.join(VENDOR_DIR, "SDL2/lib/darwin"),
+        path.join(VENDOR_DIR, "soloud/lib"),
+    }
+    links { "SDL2" }
+    embed {
+        "libSDL2.dylib",
+    }
 	-- 	links { "QuartzCore.framework", "Metal.framework", "Cocoa.framework", "IOKit.framework", "CoreVideo.framework" }
 	-- 	linkoptions { 
 	-- 		"-lc++",
