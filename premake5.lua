@@ -50,7 +50,7 @@ project "sglbase"
     --     "GL_GLEXT_PROTOTYPES"
     -- }
 
-	files {"src/**.c", "src/**.h", "src/**.inl", "premake5.lua", "README.md"}
+	files {"src/**.c", "src/**.h", "src/**.inl", "premake5.lua", "README.md", ".gitignore"}
 
 	includedirs
 	{
