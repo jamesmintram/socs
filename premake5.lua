@@ -62,7 +62,7 @@ project "sglbase"
 	filter "system:windows"
 	libdirs { 
         path.join(VENDOR_DIR, "SDL2/lib/x64"),
-		path.join(VENDOR_DIR, "soloud/lib"),
+		path.join(VENDOR_DIR, "soloud/lib/x64"),
 	}
 	links { "SDL2", "SDL2main", "soloud" }
 	-- links { "gdi32", "kernel32", "psapi" }
