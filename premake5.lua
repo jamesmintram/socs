@@ -9,8 +9,8 @@ solution "sglbase"
 	
     platforms "x86_64"
 
-	filter "configurations:Release"
-		optimize "Full"
+--    filter "configurations:Release"
+--        optimize "Full"
 	filter "configurations:Debug*"
 		defines
 		{
@@ -46,17 +46,21 @@ project "sglbase"
 	rtti "Off"
 	editandcontinue "Off"
 
+    optimize "Debug"
+    symbols "On"
+
 	-- defines {
     --     "GL_GLEXT_PROTOTYPES"
     -- }
 
-	files {"src/**.c", "src/**.h", "src/**.inl", "premake5.lua", "README.md", ".gitignore"}
+	files {"src/**.c", "src/**.h", "src/**.inl", "vendor/glad/src/glad.c", "premake5.lua", "README.md", ".gitignore"}
 
 	includedirs
 	{
 		"src",
         path.join(VENDOR_DIR, "SDL2/include"),
 		path.join(VENDOR_DIR, "soloud/include"),
+        path.join(VENDOR_DIR, "glad/include"),
 	}
     
 	filter "system:windows"
@@ -73,9 +77,10 @@ project "sglbase"
         path.join(VENDOR_DIR, "SDL2/lib/darwin"),
         path.join(VENDOR_DIR, "soloud/lib"),
     }
-    links { "SDL2" }
+    links { "SDL2", "OpenGL.framework" }
     embed {
         "libSDL2.dylib",
+        "OpenGL.framework"
     }
 	-- 	links { "QuartzCore.framework", "Metal.framework", "Cocoa.framework", "IOKit.framework", "CoreVideo.framework" }
 	-- 	linkoptions { 

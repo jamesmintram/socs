@@ -1,10 +1,9 @@
 #include "game.h"
-#include  "sooc.h"
+#include "sooc.h"
 
 #include "SDL.h"
-#include "SDL_opengl.h"
-
 #include "soloud_c.h"
+#include "glad.h"
 
 #include <stdio.h>
 
@@ -34,9 +33,12 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
+    SDL_GL_LoadLibrary(NULL);
+    
 	//SDL_GLContext maincontext;
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
@@ -59,6 +61,20 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
+    app_state.gl_context = SDL_GL_CreateContext(app_state.main_window);
+    if (app_state.gl_context == NULL)
+    {
+      fprintf(stderr, "Failed to create OpenGL context: %s\n", SDL_GetError());
+        return -1;
+    }
+    
+    // Check OpenGL properties
+    printf("OpenGL loaded\n");
+    gladLoadGLLoader(SDL_GL_GetProcAddress);
+    printf("Vendor:   %s\n", glGetString(GL_VENDOR));
+    printf("Renderer: %s\n", glGetString(GL_RENDERER));
+    printf("Version:  %s\n", glGetString(GL_VERSION));
+    
 	while (app_state.quit_requested == false) 
 	{
 		sys_update(&app_state);
